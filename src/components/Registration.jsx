@@ -4,7 +4,7 @@ const Registration = () => {
   return (
     <div>
         <div>
-      
+        New Page
       </div>
       <div>
       
