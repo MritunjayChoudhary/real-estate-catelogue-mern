@@ -1,0 +1,21 @@
+.header-container{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 15px;
+    color: #6c6c6c;
+    border-bottom: 3px solid #e1f9f4;
+    background-color: rgb(248, 248, 248);
+}
+.user-name{
+    font-size: 15px;
+}
+.profile{
+    font-size: 15px;
+}
+.user-icon{
+    margin-right: 5px;
+    vertical-align: middle;
+}

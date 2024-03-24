@@ -1,10 +1,11 @@
 import "./Login.css";
 import React from "react";
+import { Outlet, Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="container">
-      <div className="form_container">
+    <div className="login_container">
+      <div className="login_form_container">
         <div className="logo_head">
           <span>Logo</span>
         </div>
@@ -19,12 +20,12 @@ const Login = () => {
           <button>Sign In</button>
         </div>
         <div className="signup-btn">
-          <button>Sign Up</button>
+        <Link to="/signup" ><button>Sign Up</button></Link>
         </div>
       </div>
       <div className="footer_text">
         <span className="text">Don’t have an account?</span>
-        <span className="signup_new">Sign Up</span>
+        <Link to="/signup" className="signup_new">Sign Up</Link>
       </div>
     </div>
   );
