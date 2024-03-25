@@ -139,41 +139,70 @@ const PropertyDetails = () => {
         <div>
         <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Price</Form.Label>
+                <Form.Label>Length</Form.Label>
                 <Form.Control type="text" placeholder="Example : 10000" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Price</Form.Label>
+                <Form.Label>Breath</Form.Label>
                 <Form.Control type="text" placeholder="Example : 10000" />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Price</Form.Label>
+                <Form.Label>Total Area</Form.Label>
                 <Form.Control type="text" placeholder="Example : 10000" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Ownership</Form.Label>
+                    <Form.Label>Area Unit</Form.Label>
                     <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
-                        <option>Yes</option>
-                        <option>No</option>
+                        <option>Sq. feet</option>
+                        <option>Sq. meter</option>
                     </Form.Select>
                 </Form.Group>
             </Row>
         <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Property Type</Form.Label>
+                    <Form.Label>No. of BHK</Form.Label>
                     <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Negotiable</Form.Label>
+                    <Form.Label>No. of floors</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                    </Form.Select>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Attached</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </Form.Select>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Western Tiolet</Form.Label>
                     <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
                         <option>Yes</option>
@@ -183,15 +212,16 @@ const PropertyDetails = () => {
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Property Type</Form.Label>
+                    <Form.Label>Furnished</Form.Label>
                     <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
-                        <option>...</option>
+                        <option>Yes</option>
+                        <option>No</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Negotiable</Form.Label>
+                    <Form.Label>Car parking</Form.Label>
                     <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
                         <option>Yes</option>
@@ -201,34 +231,17 @@ const PropertyDetails = () => {
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Property Type</Form.Label>
+                    <Form.Label>Lift</Form.Label>
                     <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Negotiable</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
+                    <option>Choose...</option>
                         <option>Yes</option>
                         <option>No</option>
-                    </Form.Select>
-                </Form.Group>
-            </Row>
-            <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Property Type</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Price</Form.Label>
-                <Form.Control type="text" placeholder="Example : 10000" />
+                <Form.Label>Electricity</Form.Label>
+                <Form.Control type="text" placeholder="Example : 3 phase" />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -236,7 +249,10 @@ const PropertyDetails = () => {
                     <Form.Label>Facing</Form.Label>
                     <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
-                        <option>...</option>
+                        <option>East</option>
+                        <option>West</option>
+                        <option>North</option>
+                        <option>South</option>
                     </Form.Select>
                 </Form.Group>
 
@@ -250,12 +266,61 @@ const GenInfo = () => {
     return (
         <>
         <div>
-            <label htmlFor="Area">Name </label>
-            <input name='Area' type="text" />
-            <label htmlFor="Length"> Mobile</label>
-            <input name='Length' type="text" />
-            <label htmlFor="Breath">Posted by</label>
-            <input name='Breath' type="text" />
+        <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" placeholder="Owner" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Mobile No.</Form.Label>
+                <Form.Control type="text" placeholder="Enter Mobile No." />
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Posted By</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>Owner</option>
+                        <option>Broker</option>
+                    </Form.Select>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Sale Type</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </Form.Select>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Featured Package</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </Form.Select>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>PPD package</Form.Label>
+                    <Form.Select defaultValue="Choose...">
+                        <option>Choose...</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </Form.Select>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Add Image</Form.Label>
+                <Form.Control type="file" placeholder="image" />
+                </Form.Group>
+            </Row>
         </div>
         </>
     )
@@ -265,12 +330,51 @@ const LastInfo = () => {
     return (
         <>
         <div>
-            <label htmlFor="Area">Name </label>
-            <input name='Area' type="text" />
-            <label htmlFor="Length"> Mobile</label>
-            <input name='Length' type="text" />
-            <label htmlFor="Breath">Posted by</label>
-            <input name='Breath' type="text" />
+        <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="text" placeholder="Enter your Email" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>City</Form.Label>
+                <Form.Control type="text" placeholder="enter yoyr city" />
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Area</Form.Label>
+                <Form.Control type="text" placeholder="Area" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>PIN code</Form.Label>
+                <Form.Control type="text" placeholder="PIN code" />
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Address</Form.Label>
+                <Form.Control type="text" placeholder="Address" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Landmark</Form.Label>
+                <Form.Control type="text" placeholder="Landmark" />
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Latitude</Form.Label>
+                <Form.Control type="text" placeholder="Latitude" />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Longitude</Form.Label>
+                <Form.Control type="text" placeholder="Longitude" />
+                </Form.Group>
+            </Row>
+           
         </div>
         </>
     )
