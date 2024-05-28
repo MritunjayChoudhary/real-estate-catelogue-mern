@@ -4,12 +4,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+const URL = `${window.location.origin}/api/details/property`;
 
 
 
-const BasicInfo = ({basicInfo,setBasicInfo,basicInfoErr,setBasicInfoErr}) => {
+const BasicInfo = ({basicInfo,setBasicInfo}) => {
     const changeInput =  (e,data)=>{
-        setBasicInfoErr({"property":false,"negotiable":false,"price":false})
+        // setBasicInfoErr({"property":false,"negotiable":false,"price":false})
         setBasicInfo((prev)=>( {...prev,[data]:e.target.value}))
     }
     return (
@@ -19,33 +23,36 @@ const BasicInfo = ({basicInfo,setBasicInfo,basicInfoErr,setBasicInfoErr}) => {
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Property Type</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>...</option>
+                    <Form.Select defaultValue={basicInfo.propertyType} onChange={(e)=>changeInput(e,"propertyType")}>
+                        <option value="null">Select Property Type ...</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">House</option>
+                        <option value="Flat">Flat</option>
+                        <option value="Plot">Plot</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Negotiable</Form.Label>
-                    <Form.Select defaultValue="Choose...">
+                    <Form.Select defaultValue={basicInfo.Negotiable} onChange={(e)=>changeInput(e,"Negotiable")}>
                         <option>Choose...</option>
-                        <option>Yes</option>
-                        <option>No</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
                     </Form.Select>
                 </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Price</Form.Label>
-                <Form.Control type="text" placeholder="Example : 10000" />
+                <Form.Control type="text" placeholder="Example : 10000" onChange={(e)=>changeInput(e,"price")} value={basicInfo.price}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Ownership</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>Yes</option>
-                        <option>No</option>
+                    <Form.Select defaultValue={basicInfo.ownership} onChange={(e)=>changeInput(e,"ownership")} >
+                        <option value='null'>Choose...</option>
+                        <option value='yes'>Yes</option>
+                        <option value='no'>No</option>
                     </Form.Select>
                 </Form.Group>
             </Row>
@@ -262,7 +269,21 @@ const PropertyDetails = () => {
     )
 }
 
-const GenInfo = () => {
+const GenInfo = ({genInfo,setGenInfo}) => {
+
+    // const cld = new Cloudinary({cloud: {cloudName: 'dib4h0jcp'}});
+    const [image, setImage ] = useState("");
+    // console.log(image);
+    const changeInput =  (e,data)=>{
+        // setBasicInfoErr({"property":false,"negotiable":false,"price":false})
+        // console.log(e.target)
+        if(data == "image"){
+            setGenInfo((prev)=>( {...prev,[data]:e.target.files[0]}))
+        }else{
+            setGenInfo((prev)=>( {...prev,[data]:e.target.value}))
+        }
+        
+    }
     return (
         <>
         <div>
@@ -318,7 +339,7 @@ const GenInfo = () => {
             <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Add Image</Form.Label>
-                <Form.Control type="file" placeholder="image" />
+                <Form.Control type="file" placeholder="image" onChange={(e)=>changeInput(e,"image")}/>
                 </Form.Group>
             </Row>
         </div>
@@ -360,7 +381,7 @@ const LastInfo = () => {
 
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Landmark</Form.Label>
-                <Form.Control type="text" placeholder="Landmark" />
+                <Form.Control type="text" placeholder="Landmark"/>
                 </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -380,13 +401,52 @@ const LastInfo = () => {
     )
 }
 const Property = () => {
+    const navigate = useNavigate();
     const [activeTab,setActiveTab] = useState(0)
     const [basicInfo,setBasicInfo] = useState({"property":"","negotiable":"","price":0})
-    const [basicInfoErr,setBasicInfoErr] = useState({"property":false,"negotiable":false,"price":false})
-
-
-    const changeTab = ()=>{
-        console.log(activeTab)
+    // const [basicInfoErr,setBasicInfoErr] = useState({"property":false,"negotiable":false,"price":false})
+    const initialState = {
+        propertyType: null,
+        Negotiable: null,
+        price: "",
+        ownership: "",
+        propertyAge: "",
+        propertyApproved: "",
+        propertyDescription: "",
+        bankLoan: "",
+        length: "",
+        breath: "",
+        totalArea: "",
+        areaUnit: "",
+        noOfBhk: "",
+        noOfFloor: "",
+        attached: "",
+        westernToilet: "",
+        furnished: "",
+        carParking: "",
+        lift: "",
+        electricity: "",
+        facing: "",
+        name: "",
+        mobile: "",
+        postedBy: "",
+        saleType: "",
+        featuredPackage: "",
+        ppdPackage: "",
+        image: "",
+        email: "",
+        city: "",
+        area: "",
+        pinCode: "",
+        address: "",
+        landmark: "",
+        latitude: "",
+        longitude: ""
+}
+        const [propertyDetails, setPropertyDetails] = useState(initialState);
+        const [ url, setUrl ] = useState("");
+        
+        const changeTab = ()=>{
         if(activeTab == 0){
             // if(basicInfo['property'] == "" ){
             //     setBasicInfoErr((prev) => {return {...prev,"property":true}})
@@ -401,10 +461,40 @@ const Property = () => {
     const goBackTab = ()=>{
         setActiveTab(activeTab-1)
     }
-    const apiCall = () => {
-        console.log(basicInfo);
-        console.log("API CALLED to store data");
-    }
+    const uploadImage = async(imageVal) => {
+        let url = ""
+        const data = new FormData()
+        data.append("file", imageVal)
+        data.append("upload_preset", "lkbeo9ss")
+        data.append("cloud_name","dib4h0jcp")
+        await fetch(" https://api.cloudinary.com/v1_1/dib4h0jcp/image/upload",{
+        method:"post",
+        body: data
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setUrl(data.url)
+            setPropertyDetails((prev)=>( {...prev,'image':data.url}))
+        }).catch(err => console.log(err))
+        return url
+        }
+    const submitInput = async(e) => {
+        e.preventDefault();
+        const imageUrl = await uploadImage(propertyDetails.image)
+
+        try {
+            const response = await axios.post(URL,JSON.stringify({...propertyDetails,'image':url}))
+            if(response.status == 200){
+                alert(response.data.message)
+                setPropertyDetails(initialState)
+                navigate("/list")
+            }else{
+                alert(response.data.message);
+                }
+        }catch (error) {
+            alert(error)
+        }
+    }   
   return (
     <div className='property-container'>
         <div className='property-header'>ADD NEW PROPERTY</div>
@@ -418,14 +508,14 @@ const Property = () => {
                 </ul>
             </div>
             <div className='content-cont'>
-                {activeTab==0 && <BasicInfo basicInfo={basicInfo} setBasicInfo = {setBasicInfo} basicInfoErr={basicInfoErr} setBasicInfoErr={setBasicInfoErr}/>}
+                {activeTab==0 && <BasicInfo basicInfo={propertyDetails} setBasicInfo = {setPropertyDetails} />}
                 {activeTab==1 && <PropertyDetails/>}
-                {activeTab==2 && <GenInfo/>}
+                {activeTab==2 && <GenInfo genInfo={propertyDetails} setGenInfo = {setPropertyDetails}/>}
                 {activeTab==3 && <LastInfo/>}
                 {/* {activeTab==1 && <GenInfo/>} */}
                 <div className='submit-btns'>
                     {activeTab == 0 ? <button className='form-butt_1'>cancel</button>:<button className='form-butt_1' onClick={()=>goBackTab()}>Previous</button>}
-                    <button className='form-butt_2' onClick={activeTab != 3?()=>changeTab():()=>apiCall()}>{activeTab != 3 ? 'save & continue' : 'Add Property'}</button>
+                    <button className='form-butt_2' onClick={activeTab != 3?()=>changeTab():(e)=>submitInput(e)}>{activeTab != 3 ? 'save & continue' : 'Add Property'}</button>
                 </div>
                
             </div>
@@ -435,4 +525,4 @@ const Property = () => {
   )
 }
 
-export default Property
+export default Property;

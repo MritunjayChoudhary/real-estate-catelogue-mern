@@ -15,12 +15,12 @@ function App() {
 
   return (
     <>
-
 <BrowserRouter>
       <Routes>
         <Route path="signup" element={<Registration />} />
-        <Route path="/" element={<Login />} />
-        <Route path="form" element={<Main />} />
+        <Route path="login" element={<Login />} />
+        <Route path="form" element={<Main pageType={"form"} />} />
+        <Route path="list" element={<Main pageType={"list"} />} />
         <Route path="*" element={<Registration />} />
       </Routes>
     </BrowserRouter>

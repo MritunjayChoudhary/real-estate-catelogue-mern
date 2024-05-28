@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import "./Login.css";
 import axios from 'axios'
 import { Outlet, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [userData,SetUserData] = useState({"email":"","password":"","confPassword":""})
+
+  const navigate = useNavigate();
 
   const updateUserData = (e,type) => {
     if(type == "email"){ 
@@ -27,12 +30,13 @@ const Registration = () => {
     }
     const data = userData
     try{
-      const res = await axios.post('http://localhost:5000/api/auth/register',data);
+      const res = await axios.post(`${window.location.origin}/api/auth/register`,data);
       const resData = await res.data;
       if(res.status == 200 && resData?.userId){
         localStorage.setItem("authToken",resData.token)
         localStorage.setItem("user",resData.emailId)
         alert("Successfully registered User !!", "UserId => ",res.data.userId)
+        navigate("/login")
       }else{
         alert("userid not found !")
       }

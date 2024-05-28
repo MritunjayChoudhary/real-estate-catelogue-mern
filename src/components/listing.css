@@ -1,0 +1,17 @@
+.sec_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+}
+.add_property{
+    color: white;
+    background-color: #6AB4F8;
+    border: none;
+    padding: 15px;
+    border-radius: 60px;
+}
+.link_css{
+    color: white;
+    text-decoration: none;
+}
